@@ -1,0 +1,8 @@
+URxvt*.depth: 32
+URxvt*.background: Black
+URxvt*.foreground: Green
+URxvt*.scrollBar: false
+URxvt*.fade: 20
+URxvt*.cursorColor: White
+URxvt*.pointerColor: White
+URxvt*.pointerColor2: White
