@@ -12,8 +12,8 @@ from subprocess import (Popen, PIPE, check_call,
 pkg_list = [
     'vim',
     'rxvt-unicode',
-    'git',
     'xclip',
+    'wget'
 ]
 
 def install_packages( pkg_list ):
@@ -49,7 +49,7 @@ def install_pkg( pkg, options=[] ):
     '''
     if is_installed( pkg ):
         return
-    cmd = ['sudo', 'pacman'] + options + ['-S', pkg]
+    cmd = ['sudo', 'pacman', '--noconfirm'] + options + ['-S', pkg]
     output = check_output( " ".join( cmd ), shell=True ) 
     print( output )
 
