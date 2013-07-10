@@ -1,3 +1,30 @@
+set nocompatible
+
+let mapleader="," " Set comma as map leader
+
+"""""""" Mapps """"""""
+nmap <leader>r :!%<CR>
+nmap <leader>p :!python %<CR>
+map <silent> <leader>M :%s/<C-V><C-M>//<CR>
+map <leader>t :!python $(which nosetests) -v %<CR>
+map <leader>j :!ant -f /home/EIDRUdata/Tyghe/Dev/SequenceExtraction/build.xml dist<CR>
+nnoremap ; : " Use ; instead of : Nobody uses ; anyways
+" Ctrl+e/y scrolls viewport
+nnoremap <C-e> 2<C-e>
+nnoremap <C-y> 2<C-y>
+" Remap j and k to act as expected when used on long, wrapped, lines
+nnoremap j gj
+nnoremap k gk
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+nnoremap <leader>w <C-w>v<C-w>l
+
+"""""" Misc stuff """"""""
+:set relativenumber
+set ffs=unix
 syntax on " Syntax highlighting
 set background=dark " Dark backgrounds
 set showmatch " set show matching parenthesis
@@ -14,11 +41,6 @@ set history=1000 " remember more commands and search history
 set undolevels=1000 " use many muchos levels of undo
 set nomodeline " disable mode lines (security measure)
 set cursorline " underline the current line, for quick orientation
-nnoremap ; : " Use ; instead of : Nobody uses ; anyways
-
-" Ctrl+e/y scrolls viewport
-nnoremap <C-e> 2<C-e>
-nnoremap <C-y> 2<C-y>
 
 " TABS
 set ts=4 " A tab is 4 spaces
@@ -26,6 +48,8 @@ set sw=4 " Backspace deletes spaces as if a tab was there
 set expandtab " Expand tabs by default
 
 " Fixes annoying stuff
+set hls! " Turn off search highlighting?
+set nohlsearch " Turn off seach highlighting?
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 nohl " Turn off highlighting everything
 set fileformats="unix,dos,mac"
@@ -39,15 +63,6 @@ set directory=~/.vim/.tmp,~/tmp,/tmp
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set splitbelow
 set splitright
-" Remap j and k to act as expected when used on long, wrapped, lines
-nnoremap j gj
-nnoremap k gk
-" Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-nnoremap <leader>w <C-w>v<C-w>l
 
 """""""
 " Stuff I'm not sure about from William

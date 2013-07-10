@@ -6,7 +6,8 @@
 [[ $- != *i* ]] && return
 
 # Prompt string
-PS1='[\u@\h \W]\$ '
+source $HOME/git_info.bash
+PS1='[\u@\h \W]\$(git_info)\$ '
 
 ##### ALIASES #####
 # ls colors ON
