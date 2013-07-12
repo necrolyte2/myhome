@@ -42,7 +42,7 @@ git_info() {
   local branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")
 
   if [[ $branch != "" ]]; then
-    echo -e "[$branch$(git_place)$(git_status)$RESET]"
+    echo -e "($branch$(git_place)$(git_status)$RESET)"
   fi
 }
 
