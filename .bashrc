@@ -15,6 +15,10 @@ alias ls='ls --color=auto'
 alias vi='vim'
 # Ensure python2.7
 alias python='/usr/bin/python2.7'
+# Short git stuff
+alias gs='git status'
+alias gap='git add -p'
+alias gcam='git commit -am'
 
 ##### Essential Environment Variables #####
 # Default Terminal
