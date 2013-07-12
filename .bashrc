@@ -20,6 +20,8 @@ alias python='/usr/bin/python2.7'
 alias gs='git status'
 alias gap='git add -p'
 alias gcam='git commit -am'
+# Latest dir listing
+alias latest='ls -ltr | tail -n'
 
 ##### Essential Environment Variables #####
 # Default Terminal
