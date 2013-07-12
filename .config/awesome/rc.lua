@@ -280,9 +280,9 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioMute", function ()
        awful.util.spawn("amixer sset Master toggle", false) end),
     awful.key({ }, "XF86KbdBrightnessUp", function ()
-       awful.util.spawn("xbacklight + 20", false) end),
+       awful.util.spawn("xbacklight + 10", false) end),
     awful.key({ }, "XF86KbdBrightnessDown", function ()
-       awful.util.spawn("xbacklight - 20", false) end),
+       awful.util.spawn("xbacklight - 10", false) end),
     awful.key({ }, "XF86MonBrightnessUp", function ()
        awful.util.spawn("sudo mbp_backlight up", false) end),
     awful.key({ }, "XF86MonBrightnessDown", function ()
