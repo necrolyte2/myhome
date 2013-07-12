@@ -1,3 +1,4 @@
+require("textvolume")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -190,6 +191,7 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
+    right_layout:add(volume_widget)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -269,7 +271,22 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+    awful.key({ }, "XF86AudioRaiseVolume", function ()
+       awful.util.spawn("amixer set Master 9%+", false) end),
+    awful.key({ }, "XF86AudioLowerVolume", function ()
+       awful.util.spawn("amixer set Master 9%-", false) end),
+    awful.key({ }, "XF86AudioMute", function ()
+       awful.util.spawn("amixer sset Master toggle", false) end),
+    awful.key({ }, "XF86KbdBrightnessUp", function ()
+       awful.util.spawn("xbacklight + 10", false) end),
+    awful.key({ }, "XF86KbdBrightnessDown", function ()
+       awful.util.spawn("xbacklight - 10", false) end),
+    awful.key({ }, "XF86MonBrightnessUp", function ()
+       awful.util.spawn("sudo mbp_backlight up", false) end),
+    awful.key({ }, "XF86MonBrightnessDown", function ()
+       awful.util.spawn("sudo mbp_backlight down", false) end)
 )
 
 clientkeys = awful.util.table.join(
@@ -431,3 +448,15 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+function start_daemon( dae )
+    daeCheck = os.execute( "ps -ef | grep -v grep | grep " .. dae )
+    if( daeCheck ~= true ) then
+        os.execute( dae .. " &" )
+    end
+end
+
+procs = { "nm-applet", "/opt/dropbox/dropbox" }
+for k = 1, #procs do
+    start_daemon( procs[k] )
+end
