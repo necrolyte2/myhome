@@ -32,7 +32,7 @@ set ignorecase " ignore case when searching
 set smartcase " ignore case if search pattern is all lowercase,
 set scrolloff=10 " keep 10 lines off the edges of the screen when scrolling
 set virtualedit=all " allow the cursor to go in to "invalid" places
-set listchars=tab:▸\ ,trail:·,extends:#,nbsp:· " Put characters in for normally transparent characters(space, tab...)
+"set listchars=tab:▸\ ,trail:·,extends:#,nbsp:· " Put characters in for normally transparent characters(space, tab...)
 set incsearch " show search matches as you type
 set iskeyword-=_ " allow word jumping to treat underscore as a separator
 set laststatus=2 " tell VIM to always put a status line in, even
