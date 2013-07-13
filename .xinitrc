@@ -14,5 +14,8 @@ export GNOME_KEYRING_CONTROL
 export GNOME_KEYRING_PID
 #### END codylitlewood stuff ####
 
+xset b off
+xset b 0 0 0
+
 # Have awesome take over this process
 exec awesome
