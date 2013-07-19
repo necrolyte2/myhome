@@ -7,7 +7,7 @@
 
 # Prompt string
 source $HOME/git_info.bash
-PS1='[\u@\h \W]\$(git_info)\$ '
+PS1='[\u@\h \W]$(git_info)\$ '
 
 ##### ALIASES #####
 # ls colors ON
@@ -22,6 +22,8 @@ alias gap='git add -p'
 alias gcam='git commit -am'
 # Latest dir listing
 alias latest='ls -ltr | tail -n'
+# xclip shortcut for wgetting contents
+alias xclip-wget='wget $(xclip -o)'
 
 ##### Essential Environment Variables #####
 # Default Terminal
