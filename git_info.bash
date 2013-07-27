@@ -25,20 +25,25 @@ git_info() {
     local place=$(git status 2> /dev/null | head -n2 | tail -n1)
     local status=$(git status 2> /dev/null | tail -n1)
 
-    if [[ $( echo $place | grep "Your branch is ahead of" ) != "" ]]; then
-      echo -e "$PINK$AHEAD"
-    elif [[ $( echo $place | grep "Your branch is behind" ) != "" ]]; then
-      echo -e "$BLUE$BEHIND"
-    elif [[ $( echo $place | grep "Your branch and .* have diverged" ) != "" ]]; then
-      echo -e "$CYAN$DIVERGED"
-    elif [[ $status != "nothing to commit (working directory clean)" ]]; then
-      if [[ $status == 'nothing added to commit but untracked files present (use "git add" to track)' ]]; then
-        echo -e "$GRAY$UNTRACKED"
-      else
-        echo -e "$RED$CHANGED"
-      fi
+    if [[ $( echo $place | grep "Your branch is ahead of" ) != "" ]]
+    then
+        echo -e "$PINK$AHEAD"
+    elif [[ $( echo $place | grep "Your branch is behind" ) != "" ]]
+    then
+        echo -e "$BLUE$BEHIND"
+    elif [[ $( echo $place | grep "Your branch and .* have diverged" ) != "" ]]
+    then
+        echo -e "$CYAN$DIVERGED"
+    elif [[ $status != "nothing to commit (working directory clean)" ]]
+    then
+        if [[ $status == 'nothing added to commit but untracked files present (use "git add" to track)' ]]
+        then
+            echo -e "$GRAY$UNTRACKED"
+        else
+            echo -e "$GREEN$GOOD"
+        fi
     else
-      echo -e "$GREEN$GOOD"
+        echo -e "$GREEN$GOOD"
     fi
   }
 

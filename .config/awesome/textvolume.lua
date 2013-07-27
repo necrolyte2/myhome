@@ -10,7 +10,7 @@ function update_volume(widget)
    local fd = io.popen("amixer sget Master")
    local status = fd:read("*all")
    fd:close()
-
+    
    local volume = string.match(status, "(%d?%d?%d)%%")
    volume = string.format("% 3d", volume)
 

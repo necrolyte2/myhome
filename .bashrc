@@ -14,8 +14,6 @@ PS1='[\u@\h \W]$(git_info)\$ '
 alias ls='ls --color=auto'
 # Use vim
 alias vi='vim'
-# Ensure python2.7
-alias python='/usr/bin/python2.7'
 # Short git stuff
 alias gs='git status'
 alias gap='git add -p'
