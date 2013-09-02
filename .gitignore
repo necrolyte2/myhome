@@ -1,3 +1,8 @@
 .config/chromium
 .config/pulse
 .config/gtk*
+.config/menus
+.config/autostart
+.config/google-chrome
+.config/google-googletalkplugin
+.config/mirage
