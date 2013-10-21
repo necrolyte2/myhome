@@ -1,0 +1,14 @@
+#!/bin/bash
+
+plantronics="$HOME/.asound-plantronics"
+default="$HOME/.asound-onboard"
+
+setdevice=$(readlink $HOME/.asoundrc)
+
+rm ~/.asoundrc
+if [ "${setdevice}" == "${plantronics}" ]
+then
+    ln -s $default ~/.asoundrc
+else
+    ln -s $plantronics ~/.asoundrc
+fi
