@@ -6,16 +6,14 @@
 [[ $- != *i* ]] && return
 
 # Prompt string
-source $HOME/git_info.bash
-PS1='[\u@\h \W]$(git_info)\$ '
+source /usr/share/git/completion/git-prompt.sh 
+PS1='[\u@\h \W]$(__git_ps1)\$ '
 
 ##### ALIASES #####
 # ls colors ON
 alias ls='ls --color=auto'
 # Use vim
 alias vi='vim'
-# Ensure python2.7
-alias python='/usr/bin/python2.7'
 # Short git stuff
 alias gs='git status'
 alias gap='git add -p'
@@ -27,7 +25,7 @@ alias xclip-wget='wget $(xclip -o)'
 
 ##### Essential Environment Variables #####
 # Default Terminal
-TERM="rxvt-unicode-256color"
+TERM="xterm-256color"
 # Default Editor
 EDITOR="vim"
 # Directory Colors
