@@ -5,9 +5,10 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Prompt string
-source /usr/share/git/completion/git-prompt.sh 
-PS1='[\u@\h \W]$(__git_ps1)\$ '
+if [ -e /etc/bash_completion.d/git-prompt ]
+then
+    PS1='[\u@\h \W]$(__git_ps1)\$ '
+fi
 
 ##### ALIASES #####
 # ls colors ON
