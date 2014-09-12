@@ -8,6 +8,13 @@
 if [ -e /etc/bash_completion.d/git-prompt ]
 then
     PS1='[\u@\h \W]$(__git_ps1)\$ '
+elif [ -e /etc/bash_completion.d/git ]
+then
+    . /etc/bash_completion.d/git
+    GIT_PS1_SHOWDIRTYSTATE=1
+    PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+else
+    PS1='[\u@\h \W]\$ '
 fi
 
 ##### ALIASES #####
