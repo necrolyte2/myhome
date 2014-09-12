@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# testfilepath should be the first arg
+testfilepath=$1
+testpath=$(dirname $testfilepath)
+testfilename=$(basename $testfilepath)
+if [ -z "$testfilepath" ] || [ "${testfilepath:0:1}" == "-" ]
+then
+    echo "You must supply a file to test with nosetests"
+    exit 1
+fi
+
+# Args are everything after first parameter
+args=( $@ )
+args=${args[@]:1}
+
+# testfilepath should begin with a test so we will search for it
+# if it does not
+if [[ ! $testfilename =~ test_ ]]
+then
+    test_file=$(find $testpath -name "test_$testfilename")
+    if [ -z "$test_file" ]
+    then
+        echo "Could not locate test_$testfilename"
+        exit 1
+    fi
+    testfilepath=$test_file
+fi
+
+echo "Testing $testfilepath"
+/usr/bin/env python $(which nosetests) -v $testfilepath $args
