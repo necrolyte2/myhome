@@ -20,15 +20,23 @@ alias gs='git status'
 alias gap='git add -p'
 alias gcam='git commit -am'
 # Latest dir listing
+alias latestl='ls -ltr | tail -n'
+alias latest='ls -tr | tail -n'
+# Install python package
+alias pyinstall='rm -rf build 2>/dev/null; python setup.py install'
+# Because why not?
+alias ssh='ssh -Y'
+# Ensure nosetests is correctly called
+alias nosetests='python $(which nosetests)'
+
+##### Essential Environment Variables #####
+export TERM=xterm-256color
 alias latest='ls -ltr | tail -n'
 # xclip shortcut for wgetting contents
 alias xclip-wget='wget $(xclip -o)'
-
-##### Essential Environment Variables #####
-# Default Terminal
-TERM="xterm-256color"
 # Default Editor
 EDITOR="vim"
+
 # Directory Colors
 # man dir_colors for more information on this
 LS_COLORS='rs=0:di=1;33:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32'
