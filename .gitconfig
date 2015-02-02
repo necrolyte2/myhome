@@ -4,4 +4,6 @@
 [credential]
 	helper = cache --timeout=86400
 [push]
-	default = simple
+	default = tracking
+[core]
+	excludesfile = /home/AMED/tyghe.vallard/.gitignore
