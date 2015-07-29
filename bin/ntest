@@ -28,4 +28,9 @@ then
 fi
 
 echo "Testing $testfilepath"
-/usr/bin/env python $(which nosetests) -v $testfilepath $args
+if [ -e setup.py ]
+then
+    python setup.py nosetests -v --tests $testfilepath $args
+else
+    python $(which nosetests) -v $testfilepath $args
+fi
