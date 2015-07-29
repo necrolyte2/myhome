@@ -14,8 +14,18 @@ export GNOME_KEYRING_CONTROL
 export GNOME_KEYRING_PID
 #### END codylitlewood stuff ####
 
+# Start up audio goodies
+if [ "$(which start-pulseaudio-x11)" != "" ]
+then
+    start-pulseaudio-x11
+fi
+if [ "$(which pasystray)" != "" ]
+then
+    pasystray &
+fi
+
 xset b off
 xset b 0 0 0
 
 # Have awesome take over this process
-exec awesome
+exec $1

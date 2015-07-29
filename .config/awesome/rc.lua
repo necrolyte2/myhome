@@ -11,6 +11,11 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+procs = {
+    "nm-applet",
+    "/opt/dropbox/dropbox",
+    "pasystray"
+}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -39,10 +44,76 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
+-- configuration - edit to your liking
+
+-- get cropped files from directory
+function scandir(directory)
+    local i, t, popen = 0, {}, io.popen
+    for filename in popen('ls '..directory..'*'):lines() do
+        i = i + 1
+        t[i] = filename
+    end
+    return t
+end
+            
+function exists(path)
+    local sout
+    sout = io.popen('test -e '..path..' && echo exists'):read()
+    if sout == 'exists' then
+        return true
+    end
+    return false
+end
+
+wp_index = 1
+wp_timeout  = 5
+wp_path = "/home/tyghe/wallpapers"
+wp_files = scandir(wp_path)
+
+-- setup the timer
+wp_timer = timer { timeout = wp_timeout }
+wp_timer:connect_signal("timeout", function()
+  -- This is hard set to use cropped images 
+  -- wp1 is the left cropped image, wp2 is the right part
+  -- I manually ran the convert utility on all files in a directory
+  -- to crop them in half as follows
+  -- for f in ~/wallpapers/*; do convert $f -crop 1920x1080; done
+  -- mv ~/wallpapers/*-{0,1}.* ~/wallpapers/crop
+  wp_crop_path = wp_path .. '/.crop'
+  wp = wp_files[wp_index]
+  wp1 = wp_crop_path ..'/'.. string.gsub(wp, '(%.%w+)$', '-0%1')
+  wp2 = string.gsub(wp1, '-0', '-1')
+
+  -- Make sure crop dir is made
+  os.execute('mkdir -p '..wp_crop_path)
+
+  -- Cut image in half if not done already
+  if not exists(wp1) then
+      cmd = 'convert '.. wp_path ..'/'.. wp ..' -crop %50x%100 '.. wp_crop_path ..'/'.. wp
+      os.execute(cmd)
+  end
+
+  gears.wallpaper.maximized(wp1, 1, true)
+  gears.wallpaper.maximized(wp2, 2, true)
+ 
+  -- stop the timer (we don't need multiple instances running at the same time)
+  wp_timer:stop()
+ 
+  -- get next random index
+  wp_index = math.random( 1, #wp_files)
+ 
+  --restart the timer
+  wp_timer.timeout = wp_timeout
+  wp_timer:start()
+end)
+ 
+-- initial start when rc.lua is first run
+wp_timer:start()
 beautiful.init("/home/tyghe/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
+webbrowser = "google-chrome-stable"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -97,10 +168,30 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+evemenu = {
+        { "Eve", 'playonlinux --run "EVE online"' },
+        { "PyFa", 'pyfa'},
+        { "EveMon", '/home/tyghe/bin/evemon.sh'},
+        { "EFT", '/home/tyghe/bin/eft.sh'},
+        { "Sisi", 'playonlinux --run "Singularity"' },
+}
+
+gamesmenu = {
+        { "Planetary Annihilation", '/home/tyghe/Downloads/PA/PA' },
+        { "Play on Linux", 'playonlinux' },
+        { "Steam", 'steam' },
+}
+
+mymainmenu = awful.menu({
+    items = {
+        { "awesome", myawesomemenu, beautiful.awesome_icon },
+        { "Internet Spaceships", evemenu, beautiful.awesome_icon },
+        { "Games", gamesmenu, beautiful.awesome_icon },
+        { "open terminal", terminal },
+        { "ChromePenis", webbrowser },
+        { "Shutdown", 'sudo poweroff' },
+    }
+})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -246,6 +337,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey, "Shift"   }, "w", function() awful.util.spawn(webbrowser) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -370,6 +462,10 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
+    --{ -- I don't know what this does, trying to get chrome to do stuff
+     --   rule = { class = "google-chrome-stable" },
+      --  properties = { tag = browse }
+    --},
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -456,7 +552,26 @@ function start_daemon( dae )
     end
 end
 
-procs = { "nm-applet", "/opt/dropbox/dropbox" }
 for k = 1, #procs do
     start_daemon( procs[k] )
 end
+
+-- {{{ Function definitions
+
+-- scan directory, and optionally filter outputs
+function scandir(directory, filter)
+    local i, t, popen = 0, {}, io.popen
+    if not filter then
+        filter = function(s) return true end
+    end
+    print(filter)
+    for filename in popen('ls -a "'..directory..'"'):lines() do
+        if filter(filename) then
+            i = i + 1
+            t[i] = filename
+        end
+    end
+    return t
+end
+
+-- }}}
