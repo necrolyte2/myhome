@@ -6,6 +6,7 @@
 [push]
 	default = tracking
 [core]
-	excludesfile = /home/AMED/tyghe.vallard/.gitignore
+	excludesfile = /home/tyghe/.gitignore
+	preloadindex = true
 [github]
 	user = necrolyte2
