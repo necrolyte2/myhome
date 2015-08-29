@@ -7,3 +7,5 @@
 	default = tracking
 [core]
 	excludesfile = /home/AMED/tyghe.vallard/.gitignore
+[github]
+	user = necrolyte2

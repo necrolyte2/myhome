@@ -66,7 +66,7 @@ function exists(path)
 end
 
 wp_index = 1
-wp_timeout  = 5
+wp_timeout  = 600
 wp_path = "/home/tyghe/wallpapers"
 wp_files = scandir(wp_path)
 
@@ -190,6 +190,7 @@ mymainmenu = awful.menu({
         { "open terminal", terminal },
         { "ChromePenis", webbrowser },
         { "Shutdown", 'sudo poweroff' },
+        { "Reboot", 'sudo reboot' },
     }
 })
 
