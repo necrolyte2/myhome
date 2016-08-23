@@ -18,7 +18,7 @@ Plugin 'airblade/vim-gitgutter'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 call vundle#end()            " required
-filetype plugin indent on    " required
+"filetype plugin indent on    " required
 
 let mapleader="," " Set comma as map leader
 
@@ -31,7 +31,7 @@ map <leader>tc :!~/bin/ntest % -a 'current'<CR>
 map <leader>dt :!python -m doctest %<CR>
 map <leader>s  :setlocal spell spelllang=en_us<CR>
 map <leader>rs :!bundle exec rspec %\:<C-R>=line('.')<CR><CR>
-map <leader>c  :!cat % | pbcopy
+map <leader>c  :!cat % \| pbcopy
 nnoremap ; : " Use ; instead of : Nobody uses ; anyways
 noremap <C-i> :exe '! '.@0 <CR>
 " Ctrl+e/y scrolls viewport
@@ -119,7 +119,6 @@ endif
 
 " What does this little gem do?
 if version >= 703
-    set colorcolumn=85
     nmap <leader>r :set relativenumber!<CR>
     set undofile                " keep a persistent backup file
     set undodir=~/.vim/.undo,~/tmp,/tmp
@@ -130,5 +129,6 @@ if version >= 720
 endif
 
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
-autocmd FileType ruby set noexpandtab shiftwidth=2 softtabstop=2
-autocmd FileType yaml set noexpandtab shiftwidth=2 softtabstop=2
+autocmd FileType ruby set expandtab shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType yaml set expandtab shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType python set expandtab shiftwidth=2 softtabstop=2 tabstop=2
