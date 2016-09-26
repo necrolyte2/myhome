@@ -25,8 +25,11 @@ else
 fi
 
 ##### ALIASES #####
-# ls colors ON
-alias ls='ls --color=auto'
+# ls colors ON if supported
+if "$(uname)" != "Darwin"
+then
+    alias ls='ls --color=auto'
+fi
 # Use vim
 alias vi='vim'
 # Short git stuff
@@ -44,7 +47,7 @@ alias ssh='ssh -Y'
 alias nosetests='python $(which nosetests)'
 
 ##### Essential Environment Variables #####
-export TERM=xterm-256color
+export TERM=screen-256color
 alias latest='ls -ltr | tail -n'
 # xclip shortcut for wgetting contents
 alias xclip-wget='wget $(xclip -o)'

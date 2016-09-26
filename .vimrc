@@ -5,18 +5,14 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+"Plugin 'gmarik/Vundle.vim'
 " snake python vim scripting
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'chrisbra/csv.vim'
-Plugin 'airblade/vim-gitgutter'
-"
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+"Plugin 'mattn/webapi-vim'
+"Plugin 'mattn/gist-vim'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'chrisbra/csv.vim'
+"Plugin 'airblade/vim-gitgutter'
+"Plugin 'tpope/vim-fugitive'
 call vundle#end()            " required
 "filetype plugin indent on    " required
 
@@ -26,12 +22,12 @@ let mapleader="," " Set comma as map leader
 nmap <leader>r :!%<CR>
 nmap <leader>p :!python %<CR>
 map <silent> <leader>M :%s/<C-V><C-M>//<CR>
-map <leader>t :!~/bin/ntest %<CR>
-map <leader>tc :!~/bin/ntest % -a 'current'<CR>
+map <leader>pt :!nosetests %<CR>
 map <leader>dt :!python -m doctest %<CR>
 map <leader>s  :setlocal spell spelllang=en_us<CR>
 map <leader>rs :!bundle exec rspec %\:<C-R>=line('.')<CR><CR>
-map <leader>c  :!cat % \| pbcopy
+map <leader>c  :!cat % \| pbcopy<CR>
+map <leader>rb :!ruby %<CR>
 nnoremap ; : " Use ; instead of : Nobody uses ; anyways
 noremap <C-i> :exe '! '.@0 <CR>
 " Ctrl+e/y scrolls viewport
@@ -131,4 +127,5 @@ endif
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType ruby set expandtab shiftwidth=2 softtabstop=2 tabstop=2
 autocmd FileType yaml set expandtab shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType json set expandtab shiftwidth=2 softtabstop=2 tabstop=2
 autocmd FileType python set expandtab shiftwidth=2 softtabstop=2 tabstop=2
