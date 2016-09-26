@@ -1,6 +1,6 @@
 [user]
 	name = Tyghe Vallard
-	email = vallardt@gmail.com
+	email = tyghe.vallard@target.com
 [credential]
 	helper = cache --timeout=86400
 [push]
@@ -8,5 +8,10 @@
 [core]
 	excludesfile = /home/tyghe/.gitignore
 	preloadindex = true
+	editor = /usr/bin/vim
 [github]
 	user = necrolyte2
+[init]
+	templatedir = ~/.git-templates
+[alias]
+	tag = tag --sort version:refname
