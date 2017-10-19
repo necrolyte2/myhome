@@ -69,3 +69,6 @@ LS_COLORS='rs=0:di=1;33:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd
 export LS_COLORS
 
 set -o vi
+
+# erasedups collapses duplicate entries in histrory
+export HISTCONTROL=erasedups:ignorespace
